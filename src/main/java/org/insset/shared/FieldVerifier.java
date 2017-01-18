@@ -58,6 +58,9 @@ public class FieldVerifier {
 
     public static boolean isValidRoman(String nbr) {
         //Implement your code
+        if((nbr.isEmpty()) || (!nbr.matches("(I|V|X|L|C|D|M|i|v|x|l|c|d|m)+"))|| (nbr == null)){
+            return false;
+        }
         return true;
     }
 
