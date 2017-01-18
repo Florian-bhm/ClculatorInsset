@@ -56,16 +56,29 @@ public class FieldVerifier {
         if(nbr <= 0 || nbr > 2000 || nbr == null) {
              return false;
         }   
-        
         return true;
     }
 
+    /**
+     * Verify if roman format is like expected 
+     * @param nbr input roman string
+     * @return true if format good
+     */
     public static boolean isValidRoman(String nbr) {
         //Implement your code
+        if((nbr.isEmpty()) || (!nbr.matches("(I|V|X|L|C|D|M|i|v|x|l|c|d|m)+"))|| (nbr == null)){
+            return false;
+        }
         return true;
     }
 
+    /**
+     * Verify if date format is like expected 
+     * @param date input date
+     * @return true if format good
+     */
     public static boolean isValidDate(String date) {
+
         if(!date.matches("\\d{2}(-|\\/)\\d{2}(-|\\/)\\d{4}")) {
             return false;
         }

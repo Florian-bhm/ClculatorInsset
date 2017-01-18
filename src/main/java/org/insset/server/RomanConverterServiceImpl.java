@@ -9,6 +9,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
+import org.insset.client.message.dialogbox.DialogBoxInssetPresenter;
 import org.insset.client.service.RomanConverterService;
 
 /**
@@ -19,6 +20,9 @@ import org.insset.client.service.RomanConverterService;
 public class RomanConverterServiceImpl extends RemoteServiceServlet implements
         RomanConverterService {
 
+    /**
+     * Map for matching each roman element to a value
+     */
     private final Map<Integer, String> correspondanceRomainDecimal = new TreeMap<Integer, String>(Collections.reverseOrder()) {
         {
             put(1000, "M");
@@ -38,12 +42,14 @@ public class RomanConverterServiceImpl extends RemoteServiceServlet implements
         }
     };
 
+    /**
+     * Convert a decimal date year to a roman date yeaf
+     * @param nbr the string date in decimal
+     * @return the date in roman format 
+     * @throws IllegalArgumentException 
+     */
     @Override
     public String convertDateYears(String nbr) throws IllegalArgumentException {
-        
-        System.out.println("ici");
-        System.out.println(nbr);
-        
         String resultat = "";
       
         String[] date = nbr.split("\\/|-");
@@ -54,12 +60,88 @@ public class RomanConverterServiceImpl extends RemoteServiceServlet implements
         return resultat;
     }
 
+    /**
+     * Convert a roman value to a decimal value
+     * @param nbr the roman value in string
+     * @return a integer which is a convert from roman value
+     * @throws IllegalArgumentException 
+     */
     @Override
     public Integer convertRomanToArabe(String nbr) throws IllegalArgumentException {
-        //Implement your code
-        return 3;
+        
+        int decimal = 0;
+        int lastNumber = 0;
+        String romanNumeral = nbr.toUpperCase();
+        /* operation to be performed on upper cases even if user 
+           enters roman values in lower case chars */
+        for (int x = romanNumeral.length() - 1; x >= 0 ; x--) {
+            char convertToDecimal = romanNumeral.charAt(x);
+
+            switch (convertToDecimal) {
+                case 'M':
+                    decimal = processDecimal(1000, lastNumber, decimal);
+                    lastNumber = 1000;
+                    break;
+
+                case 'D':
+                    decimal = processDecimal(500, lastNumber, decimal);
+                    lastNumber = 500;
+                    break;
+
+                case 'C':
+                    decimal = processDecimal(100, lastNumber, decimal);
+                    lastNumber = 100;
+                    break;
+
+                case 'L':
+                    decimal = processDecimal(50, lastNumber, decimal);
+                    lastNumber = 50;
+                    break;
+
+                case 'X':
+                    decimal = processDecimal(10, lastNumber, decimal);
+                    lastNumber = 10;
+                    break;
+
+                case 'V':
+                    decimal = processDecimal(5, lastNumber, decimal);
+                    lastNumber = 5;
+                    break;
+
+                case 'I':
+                    decimal = processDecimal(1, lastNumber, decimal);
+                    lastNumber = 1;
+                    break;
+            }
+        }
+        
+        if (decimal >2000){
+           
+        } 
+        return decimal;        
     }
 
+    /**
+     * Algo for add or remove value when converting roman to decimal
+     * @param decimal actualValue
+     * @param lastNumber last low value (substract)
+     * @param lastDecimal substract
+     * @return new value of actual integer
+     */
+    public static int processDecimal(int decimal, int lastNumber, int lastDecimal) {
+        if (lastNumber > decimal) {
+            return lastDecimal - decimal;
+        } else {
+            return lastDecimal + decimal;
+        }
+    }
+       
+    /**
+     * Convert a decimal value to roman
+     * @param input the integer write by user
+     * @return the roman string
+     * @throws IllegalArgumentException 
+     */
     @Override
     public String convertArabeToRoman(Integer input) throws IllegalArgumentException {
         String string = "";
