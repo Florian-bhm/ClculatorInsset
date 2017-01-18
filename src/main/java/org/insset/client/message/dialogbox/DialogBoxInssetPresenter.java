@@ -25,6 +25,10 @@ public class DialogBoxInssetPresenter extends DialogBox {
         formateBox(demande, reponse);
     }
 
+    public DialogBoxInssetPresenter(String erreur_conversion_limide_de_2000_dépassé) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void formateBox(String demande, String reponse) {
 
 //         Create the popup dialog box
