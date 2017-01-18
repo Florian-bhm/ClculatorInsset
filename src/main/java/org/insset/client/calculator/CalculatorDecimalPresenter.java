@@ -54,6 +54,10 @@ public class CalculatorDecimalPresenter extends Composite {
     public Label errorLabelAToR;
     @UiField
     public Label errorLabelD;
+    
+    private static final String SERVER_ERROR = "An error occurred while "
+            + "attempting to contact the server. Please check your network "
+            + "connection and try again.";
 
     private static final String SERVER_ERROR = "An error occurred while "
             + "attempting to contact the server. Please check your network "
@@ -135,7 +139,7 @@ public class CalculatorDecimalPresenter extends Composite {
         }
         service.convertRomanToArabe(valR.getText(), new AsyncCallback<Integer>() {
             public void onFailure(Throwable caught) {
-                // Show the RPC error message to the user
+                // Show the RPC error message to the use
                Window.alert(SERVER_ERROR);
                //errorLabelAToR.setText("Limite de 2000 dépassé");
             }
@@ -156,15 +160,15 @@ public class CalculatorDecimalPresenter extends Composite {
      */
     private void convertArabeToRoman() {
         errorLabelAToR.setText("");
-        if (!FieldVerifier.isValidRoman(valA.getText())) {
+        if (!FieldVerifier.isValidDecimal(Integer.parseInt(valA.getText()))) {
             errorLabelAToR.addStyleName("serverResponseLabelError");
-            errorLabelAToR.setText("Format incorect");
+            errorLabelAToR.setText("Le nombre doit être entre 1 et 2000");
             return;
         }
         service.convertArabeToRoman(Integer.parseInt(valA.getText()), new AsyncCallback<String>() {
             public void onFailure(Throwable caught) {
                 // Show the RPC error message to the user
-//                Window.alert(SERVER_ERROR);
+                Window.alert(SERVER_ERROR);
             }
 
             public void onSuccess(String result) {
@@ -178,16 +182,17 @@ public class CalculatorDecimalPresenter extends Composite {
      */
     private void convertDate() {
         //Verif
+        errorLabelD.setText("");
         if (!FieldVerifier.isValidDate(valD.getText())) {
-            errorLabelAToR.addStyleName("serverResponseLabelError");
-            errorLabelAToR.setText("Format incorect");
+            errorLabelD.addStyleName("serverResponseLabelError");
+            errorLabelD.setText("Le format doit être xx/xx/xxxx ou xx-xx-xxxx");
             return;
         }
         //call server
         service.convertDateYears(valD.getText(), new AsyncCallback<String>() {
             public void onFailure(Throwable caught) {
                 // Show the RPC error message to the user
-//                Window.alert(SERVER_ERROR);
+                Window.alert(SERVER_ERROR);
             }
 
             public void onSuccess(String result) {
