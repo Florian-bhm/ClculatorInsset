@@ -1,5 +1,11 @@
 package org.insset.shared;
 
+import java.text.DateFormat;
+import java.lang.Exception;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * <p>
  * FieldVerifier validates that the name the user enters is valid.
@@ -78,11 +84,19 @@ public class FieldVerifier {
      * @return true if format good
      */
     public static boolean isValidDate(String date) {
-
-        if(!date.matches("\\d{2}(-|\\/)\\d{2}(-|\\/)\\d{4}")) {
+        
+        if(date.matches("\\d{2}(-|\\/)\\d{2}(-|\\/)\\d{4}")) {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                dateFormat.setLenient(false);
+                Date datea = dateFormat.parse(date);
+                return true;
+            } 
+            catch (Exception e) {
+                return false;
+            }
+        } else {
             return false;
         }
-        
-        return true;
     }
 }

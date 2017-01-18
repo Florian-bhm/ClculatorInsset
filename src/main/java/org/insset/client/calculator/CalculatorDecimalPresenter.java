@@ -129,6 +129,7 @@ public class CalculatorDecimalPresenter extends Composite {
      * call server
      */
     private void convertRomanToArabe() {
+        errorLabelRToA.setText("");
         if (!FieldVerifier.isValidRoman(valR.getText())) {
             errorLabelRToA.addStyleName("serverResponseLabelError");
             errorLabelRToA.setText("Format de chiffre romain incorrect");

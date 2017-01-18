@@ -7,6 +7,7 @@ package org.insset.shared;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+import java.lang.Exception;
 
 /**
  *
@@ -33,7 +34,19 @@ public class FieldVerifierTest {
     public void testIsValidDateKO() {
         FieldVerifier instance = new FieldVerifier();
         boolean resExpected = false;
-        boolean resultat = instance.isValidDate("14/04/24016");
+        boolean resultat = instance.isValidDate("14/04/19988");
+        
+        assertEquals(resExpected, resultat);
+    }
+    
+    /**
+     * Test if date works as expected when false format
+     */
+    @Test
+    public void testIsValidDateKO31February() {
+        FieldVerifier instance = new FieldVerifier();
+        boolean resExpected = false;
+        boolean resultat = instance.isValidDate("31/02/1998");
         
         assertEquals(resExpected, resultat);
     }
