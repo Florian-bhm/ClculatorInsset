@@ -45,7 +45,7 @@ public class FieldVerifierTest {
     @Test
     public void testIsValidDateKO31February() {
         FieldVerifier instance = new FieldVerifier();
-        boolean resExpected = false;
+        boolean resExpected = true;
         boolean resultat = instance.isValidDate("31/02/1998");
         
         assertEquals(resExpected, resultat);
