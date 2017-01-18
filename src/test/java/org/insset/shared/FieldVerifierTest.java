@@ -67,4 +67,29 @@ public class FieldVerifierTest {
         
         assertEquals(resExpected, resultat);
     }
+   
+    /**
+     * Test of isValidRoman method, of class FieldVerifier.
+     */
+    @Test
+    public void testIsValidRomanKO() {
+        String nbr = "ZZER";
+        boolean expResult = false;
+        boolean result = FieldVerifier.isValidRoman(nbr);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testIsValidRomanKOVide() {
+        String nbr = "";
+        boolean expResult = false;
+        boolean result = FieldVerifier.isValidRoman(nbr);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testIsValidRomanOK() {
+        String nbr = "MDCLXVI";
+        boolean expResult = true;
+        boolean result = FieldVerifier.isValidRoman(nbr);
+        assertEquals(expResult, result);
+    }  
 }

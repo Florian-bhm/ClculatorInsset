@@ -27,6 +27,7 @@ import org.insset.shared.FieldVerifier;
  *
  * @author talend
  */
+
 public class CalculatorDecimalPresenter extends Composite {
 
     @UiField
@@ -58,6 +59,9 @@ public class CalculatorDecimalPresenter extends Composite {
             + "attempting to contact the server. Please check your network "
             + "connection and try again.";
 
+    private static final String SERVER_ERROR = "An error occurred while "
+            + "attempting to contact the server. Please check your network "
+            + "connection and try again.";
     interface MainUiBinder extends UiBinder<HTMLPanel, CalculatorDecimalPresenter> {
     }
 
@@ -130,17 +134,23 @@ public class CalculatorDecimalPresenter extends Composite {
     private void convertRomanToArabe() {
         if (!FieldVerifier.isValidRoman(valR.getText())) {
             errorLabelRToA.addStyleName("serverResponseLabelError");
-            errorLabelRToA.setText("Format incorect");
+            errorLabelRToA.setText("Format de chiffre romain incorrect");
             return;
         }
         service.convertRomanToArabe(valR.getText(), new AsyncCallback<Integer>() {
             public void onFailure(Throwable caught) {
-                // Show the RPC error message to the user
-                Window.alert(SERVER_ERROR);
+                // Show the RPC error message to the use
+               Window.alert(SERVER_ERROR);
+               //errorLabelAToR.setText("Limite de 2000 dépassé");
             }
-
             public void onSuccess(Integer result) {
+                if (result > 2000){
+                    errorLabelRToA.addStyleName("serverResponseLabelError");
+                    errorLabelRToA.setText("Limite de 2000 dépassé");
+                }
+                else{
                 new DialogBoxInssetPresenter("Convertion Roman to arabe", valR.getText(), String.valueOf(result));
+                }
             }
         });
     }
