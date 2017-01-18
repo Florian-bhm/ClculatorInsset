@@ -22,7 +22,7 @@ public class FieldVerifierTest {
     public void testIsValidDateOK() {
         FieldVerifier instance = new FieldVerifier();
         boolean resExpected = true;
-        boolean resultat = instance.isValidDate("14/04/2016");
+        boolean resultat = instance.isValidDate("14/04/1999");
         
          assertEquals(resExpected, resultat);
     }

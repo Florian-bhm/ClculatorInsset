@@ -52,7 +52,8 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
-            <scope>runtime</scope>
+            <version>2.7.0</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>

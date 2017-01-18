@@ -1,9 +1,6 @@
 package org.insset.shared;
 
-import java.text.DateFormat;
-import java.lang.Exception;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+ 
 import java.util.Date;
 
 /**
@@ -85,18 +82,10 @@ public class FieldVerifier {
      */
     public static boolean isValidDate(String date) {
         
-        if(date.matches("\\d{2}(-|\\/)\\d{2}(-|\\/)\\d{4}")) {
-            try {
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                dateFormat.setLenient(false);
-                Date datea = dateFormat.parse(date);
-                return true;
-            } 
-            catch (Exception e) {
+        if(!date.matches("(?=\\d)(?:(?!(?:(?:0?[5-9]|1[0-4])(?:\\.|-|\\/)10(?:\\.|-|\\/)(?:1582))|(?:(?:0?[3-9]|1[0-3])(?:\\.|-|\\/)0?9(?:\\.|-|\\/)(?:1752)))(31(?!(?:\\.|-|\\/)(?:0?[2469]|11))|30(?!(?:\\.|-|\\/)0?2)|(?:29(?:(?!(?:\\.|-|\\/)0?2(?:\\.|-|\\/))|(?=\\D0?2\\D(?:(?!000[04]|(?:(?:1[^0-6]|[2468][^048]|[3579][^26])00))(?:(?:(?:\\d\\d)(?:[02468][048]|[13579][26])(?!\\x20BC))|(?:00(?:42|3[0369]|2[147]|1[258]|09)\\x20BC))))))|2[0-8]|1\\d|0?[1-9])([-.\\/])(1[012]|(?:0?[1-9]))\\2((?=(?:00(?:4[0-5]|[0-3]?\\d)\\x20BC)|(?:\\d{4}(?:$|(?=\\x20\\d)\\x20)))\\d{4}(?:\\x20BC)?)(?:$|(?=\\x20\\d)\\x20))?((?:(?:0?[1-9]|1[012])(?::[0-5]\\d){0,2}(?:\\x20[aApP][mM]))|(?:[01]\\d|2[0-3])(?::[0-5]\\d){1,2})?$")) {
                 return false;
-            }
-        } else {
-            return false;
         }
+        
+        return true;
     }
 }
